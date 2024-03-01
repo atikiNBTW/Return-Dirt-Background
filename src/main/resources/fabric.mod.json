@@ -15,7 +15,7 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "com.atikinbtw.return_backgrounds.ReturnBackgrounds"
+      "com.atikinbtw.returnbackgrounds.ReturnBackgrounds"
     ]
   },
   "mixins": [
