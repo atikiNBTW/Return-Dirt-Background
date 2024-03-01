@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
-  "id": "return_backgrounds",
+  "id": "return_dirt_background",
   "version": "${version}",
-  "name": "Return Backgrounds",
-  "description": "placeholder",
+  "name": "Return Dirt Background",
+  "description": "This mod reverts the 24w09a snapshot background change",
   "authors": [
     "atikiNBTW"
   ],
   "contact": {
-    "repo": "https://github.com/atikiNBTW/Return-Backgrounds"
+    "repo": "https://github.com/atikiNBTW/Return-Dirt-Background"
   },
   "license": "MIT",
-  "icon": "assets/return_backgrounds/icon.png",
-  "environment": "*",
+  "icon": "assets/returndirtbackground/icon.png",
+  "environment": "client",
   "entrypoints": {
     "client": [
-      "com.atikinbtw.returnbackgrounds.ReturnBackgrounds"
+      "com.atikinbtw.returndirtbackground.ReturnDirtBackground"
     ]
   },
   "mixins": [
-    "return_backgrounds.mixins.json"
+    "return_dirt_background.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
