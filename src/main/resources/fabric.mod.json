@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "return_backgrounds",
+  "version": "${version}",
+  "name": "Return Backgrounds",
+  "description": "placeholder",
+  "authors": [
+    "atikiNBTW"
+  ],
+  "contact": {
+    "repo": "https://github.com/atikiNBTW/Return-Backgrounds"
+  },
+  "license": "MIT",
+  "icon": "assets/return_backgrounds/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.atikinbtw.return_backgrounds.ReturnBackgrounds"
+    ]
+  },
+  "mixins": [
+    "return_backgrounds.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
