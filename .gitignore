@@ -32,5 +32,8 @@ replay_pid*
 # fabric integrated client
 run
 
-# build folder
+# build
 build
+gradle
+gradlew
+gradlew.bat

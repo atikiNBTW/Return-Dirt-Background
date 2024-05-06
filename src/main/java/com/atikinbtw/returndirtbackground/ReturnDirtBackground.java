@@ -11,8 +11,9 @@ public class ReturnDirtBackground implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        LOGGER.info("Hello Fabric world!");
+        LOGGER.info("Initialized!");
     }
+
     public static MinecraftClient getClient() {
         return client;
     }
