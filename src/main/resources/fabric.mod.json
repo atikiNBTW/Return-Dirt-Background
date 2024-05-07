@@ -23,7 +23,7 @@
     "return_dirt_background.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": "~${loader_version}",
     "minecraft": ">=1.20.5"
   }
 }
