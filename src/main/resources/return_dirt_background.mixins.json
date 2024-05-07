@@ -6,7 +6,9 @@
   "client": [
     "GameMenuScreenMixin",
     "MessageScreenMixin",
-    "ScreenMixin"
+    "ScreenMixin",
+    "options.ControlsOptionsScreenMixin",
+    "options.SkinOptionsScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
