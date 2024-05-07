@@ -3,15 +3,20 @@ package com.atikinbtw.returndirtbackground.mixins;
 import com.atikinbtw.returndirtbackground.ReturnDirtBackground;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.MessageScreen;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MessageScreen.class)
-public class MessageScreenMixin {
-    @Unique
-    private static final Identifier OPTIONS_BACKGROUND_TEXTURE = new Identifier("textures/block/dirt.png");
+public abstract class MessageScreenMixin extends Screen {
+
+    protected MessageScreenMixin(Text title) {
+        super(title);
+    }
 
     /**
      * @author atikiNBTW
@@ -19,13 +24,21 @@ public class MessageScreenMixin {
      */
     @Overwrite
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackgroundTexture(context);
+        ReturnDirtBackground.renderBackgroundTexture(context);
     }
 
-    @Unique
-    private void renderBackgroundTexture(DrawContext context) {
-        context.setShaderColor(0.25F, 0.25F, 0.25F, 1.0F);
-        context.drawTexture(OPTIONS_BACKGROUND_TEXTURE, 0, 0, 0, 0.0F, 0.0F, ReturnDirtBackground.getClient().getWindow().getWidth(), ReturnDirtBackground.getClient().getWindow().getHeight(), 32, 32);
-        context.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+    @Inject(at = @At("HEAD"), method = "init", cancellable = true)
+    protected void init(CallbackInfo ci) {
+        ci.cancel();
+    }
+
+    @Inject(at = @At("HEAD"), method = "initTabNavigation", cancellable = true)
+    protected void initTabNavigation(CallbackInfo ci) {
+        ci.cancel();
+    }
+
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.render(context, mouseX, mouseY, delta);
+        context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 70, 16777215);
     }
 }
