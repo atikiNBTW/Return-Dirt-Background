@@ -4,9 +4,12 @@
   "package": "com.atikinbtw.returndirtbackground.mixins",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "GameMenuScreenMixin",
     "MessageScreenMixin",
     "ScreenMixin",
+    "ingame.DemoScreenMixin",
+    "ingame.DownloadingTerrainScreenMixin",
+    "ingame.GameMenuScreenMixin",
+    "ingame.SocialInteractionsScreenMixin",
     "options.ControlsOptionsScreenMixin",
     "options.OptionsScreenMixin",
     "options.SkinOptionsScreenMixin"
