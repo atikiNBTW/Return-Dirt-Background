@@ -1,5 +1,6 @@
 package com.atikinbtw.returndirtbackground.mixins.options;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.*;
 import net.minecraft.client.gui.screen.pack.PackScreen;
@@ -17,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.function.Supplier;
+
 @Mixin(OptionsScreen.class)
 public abstract class OptionsScreenMixin extends Screen {
     @Shadow @Final private ThreePartsLayoutWidget layout;
@@ -68,12 +70,12 @@ public abstract class OptionsScreenMixin extends Screen {
         adder.add(this.createButton(CHAT_TEXT, () -> new ChatOptionsScreen(this, this.settings)));
         adder.add(this.createButton(RESOURCE_PACK_TEXT, () -> new PackScreen(this.client.getResourcePackManager(), this::refreshResourcePacks, this.client.getResourcePackDir(), Text.translatable("resourcePack.title"))));
         adder.add(this.createButton(ACCESSIBILITY_TEXT, () -> new AccessibilityOptionsScreen(this, this.settings)));
-        adder.add(this.createButton(CREDITS_AND_ATTRIBUTION_TEXT, () -> new CreditsAndAttributionScreen(this)));
         ButtonWidget buttonWidget = adder.add(this.createButton(TELEMETRY_TEXT, () -> new TelemetryInfoScreen(this, this.settings)));
         if (!this.client.isTelemetryEnabledByApi()) {
             buttonWidget.active = false;
             buttonWidget.setTooltip(TELEMETRY_DISABLED_TOOLTIP);
         }
+        adder.add(this.createButton(CREDITS_AND_ATTRIBUTION_TEXT, () -> new CreditsAndAttributionScreen(this)));
         adder.add(ButtonWidget.builder(ScreenTexts.DONE, (button) -> this.close()).width(200).build(), 2, adder.copyPositioner().marginTop(6)); //
 
         this.layout.addBody(gridWidget);
@@ -81,5 +83,10 @@ public abstract class OptionsScreenMixin extends Screen {
         this.initTabNavigation();
 
         ci.cancel();
+    }
+
+    @Override
+    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.renderInGameBackground(context);
     }
 }

@@ -22,13 +22,6 @@ public class ScreenMixin {
      */
     @Overwrite
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        if (!(this.client.currentScreen instanceof GameMenuScreen) || isInGameAndInOptions()) {
-            ReturnDirtBackground.renderBackgroundTexture(context);
-        }
-    }
-
-    @Unique
-    private boolean isInGameAndInOptions() {
-        return this.client.currentScreen instanceof OptionsScreen && this.client.world == null;
+        ReturnDirtBackground.renderBackgroundTexture(context);
     }
 }
