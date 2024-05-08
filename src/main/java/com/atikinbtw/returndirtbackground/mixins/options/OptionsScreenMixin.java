@@ -1,5 +1,6 @@
 package com.atikinbtw.returndirtbackground.mixins.options;
 
+import com.atikinbtw.returndirtbackground.ReturnDirtBackground;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.*;
@@ -87,6 +88,9 @@ public abstract class OptionsScreenMixin extends Screen {
 
     @Override
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.renderInGameBackground(context);
+        if (this.client.world != null)
+            super.renderInGameBackground(context);
+
+        ReturnDirtBackground.renderBackgroundTexture(context);
     }
 }
