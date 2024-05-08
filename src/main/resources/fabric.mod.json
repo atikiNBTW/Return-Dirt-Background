@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "Return Dirt Background",
   "description": "This mod reverts the 24w09a snapshot background change",
-  "website": "https://modrinth.com/mod/return-dirt-background",
+  "homepage": "https://modrinth.com/mod/return-dirt-background",
   "authors": [
     "atikiNBTW"
   ],
