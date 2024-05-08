@@ -25,8 +25,6 @@ public class ControlsOptionsScreenMixin extends GameOptionsScreen {
     // decompiled from 1.20.4
     @Inject(at = @At("HEAD"), method = "init", cancellable = true)
     protected void init(CallbackInfo ci) {
-//        super.init();
-
         int i = this.width / 2 - 155;
         int j = i + 160;
         int k = this.height / 6 - 12;
