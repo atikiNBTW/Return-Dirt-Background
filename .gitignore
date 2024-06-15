@@ -24,16 +24,16 @@ hs_err_pid*
 replay_pid*
 
 # gradle
-.gradle
+.gradle/
 
 # idea
-.idea
+.idea/
 
 # fabric integrated client
-run
+run/
 
 # build
-build
-gradle
+build/
+gradle/
 gradlew
 gradlew.bat

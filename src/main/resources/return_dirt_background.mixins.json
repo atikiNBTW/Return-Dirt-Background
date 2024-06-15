@@ -4,15 +4,14 @@
   "package": "com.atikinbtw.returndirtbackground.mixins",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "AccessibilityOnboardingScreenMixin",
     "MessageScreenMixin",
+    "OptionsScreenMixin",
     "ScreenMixin",
     "ingame.DemoScreenMixin",
     "ingame.DownloadingTerrainScreenMixin",
     "ingame.GameMenuScreenMixin",
-    "ingame.SocialInteractionsScreenMixin",
-    "options.ControlsOptionsScreenMixin",
-    "options.OptionsScreenMixin",
-    "options.SkinOptionsScreenMixin"
+    "ingame.SocialInteractionsScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

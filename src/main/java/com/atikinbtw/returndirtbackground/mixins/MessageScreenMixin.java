@@ -24,7 +24,7 @@ public abstract class MessageScreenMixin extends Screen {
      */
     @Overwrite
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        ReturnDirtBackground.renderBackgroundTexture(context);
+        ReturnDirtBackground.renderBackgroundTexture(context); //
     }
 
     @Inject(at = @At("HEAD"), method = "init", cancellable = true)

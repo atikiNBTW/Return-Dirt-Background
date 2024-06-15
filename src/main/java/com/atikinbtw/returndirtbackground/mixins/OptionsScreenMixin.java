@@ -1,4 +1,4 @@
-package com.atikinbtw.returndirtbackground.mixins.options;
+package com.atikinbtw.returndirtbackground.mixins;
 
 import com.atikinbtw.returndirtbackground.ReturnDirtBackground;
 import net.minecraft.client.gui.DrawContext;
@@ -50,8 +50,6 @@ public abstract class OptionsScreenMixin extends Screen {
 
     @Inject(at = @At("HEAD"), method = "init", cancellable = true)
     protected void init(CallbackInfo ci) {
-        // - means that this line has been changed from the default method
-
         DirectionalLayoutWidget directionalLayoutWidget = layout.addHeader(DirectionalLayoutWidget.vertical()); //
         directionalLayoutWidget.getMainPositioner().marginBottom(20); //
         directionalLayoutWidget.add(new TextWidget(TITLE_TEXT, this.textRenderer), Positioner::alignHorizontalCenter);
@@ -65,7 +63,7 @@ public abstract class OptionsScreenMixin extends Screen {
 
         adder.add(this.createButton(SKIN_CUSTOMIZATION_TEXT, () -> new SkinOptionsScreen(this, settings)));
         adder.add(this.createButton(SOUNDS_TEXT, () -> new SoundOptionsScreen(this, this.settings)));
-        adder.add(this.createButton(VIDEO_TEXT, () -> new VideoOptionsScreen(this, this.settings)));
+        adder.add(this.createButton(VIDEO_TEXT, () -> new VideoOptionsScreen(this, this.client, this.settings)));
         adder.add(this.createButton(CONTROL_TEXT, () -> new ControlsOptionsScreen(this, this.settings)));
         adder.add(this.createButton(LANGUAGE_TEXT, () -> new LanguageOptionsScreen(this, this.settings, this.client.getLanguageManager())));
         adder.add(this.createButton(CHAT_TEXT, () -> new ChatOptionsScreen(this, this.settings)));
