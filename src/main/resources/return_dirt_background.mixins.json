@@ -8,6 +8,7 @@
     "MessageScreenMixin",
     "OptionsScreenMixin",
     "ScreenMixin",
+    "ingame.AdvancementsScreenMixin",
     "ingame.DemoScreenMixin",
     "ingame.DownloadingTerrainScreenMixin",
     "ingame.GameMenuScreenMixin",

@@ -1,6 +1,5 @@
 package com.atikinbtw.returndirtbackground.mixins;
 
-import com.atikinbtw.returndirtbackground.ReturnDirtBackground;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.LogoDrawer;
 import net.minecraft.client.gui.screen.AccessibilityOnboardingScreen;
