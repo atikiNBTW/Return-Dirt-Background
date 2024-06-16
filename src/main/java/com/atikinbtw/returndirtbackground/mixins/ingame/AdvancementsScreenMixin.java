@@ -19,8 +19,8 @@ public abstract class AdvancementsScreenMixin extends Screen {
     }
 
     /**
-     * @author
-     * @reason
+     * @author atikiNBTW
+     * @reason to render dirt image across all screen
      */
     @Overwrite
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
