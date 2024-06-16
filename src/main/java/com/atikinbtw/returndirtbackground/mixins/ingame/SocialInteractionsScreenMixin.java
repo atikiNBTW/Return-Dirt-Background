@@ -33,5 +33,4 @@ public abstract class SocialInteractionsScreenMixin extends Screen {
 
         ci.cancel();
     }
-
 }
