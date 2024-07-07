@@ -14,8 +14,7 @@ public class ReturnDirtBackground implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // - this line has been changed from the default method
-        LOGGER.info("Initialized!");
+        // - means that this line has been changed from the default method
     }
 
     public static void renderBackgroundTexture(DrawContext context) {
