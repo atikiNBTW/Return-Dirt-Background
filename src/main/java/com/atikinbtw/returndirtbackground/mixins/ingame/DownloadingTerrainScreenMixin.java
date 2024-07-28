@@ -15,6 +15,6 @@ public abstract class DownloadingTerrainScreenMixin {
      */
     @Overwrite
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        ReturnDirtBackground.renderBackgroundTexture(context);
+        ReturnDirtBackground.renderBackgroundTexture(context); //
     }
 }
