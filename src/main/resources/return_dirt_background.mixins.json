@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "AccessibilityOnboardingScreenMixin",
+    "CreditsScreenMixin",
     "MessageScreenMixin",
     "OptionsScreenMixin",
     "ScreenMixin",
