@@ -3,14 +3,11 @@ package com.atikinbtw.returndirtbackground;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.CreditsScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.option.CreditsAndAttributionScreen;
-import net.minecraft.resource.ResourcePackSource;
 import net.minecraft.util.Identifier;
 
 public class ReturnDirtBackground implements ClientModInitializer {
-    private static final Identifier DIRT_TEXTURE = Identifier.of("textures/block/dirt.png");
+    private static final Identifier DIRT_TEXTURE = Screen.MENU_BACKGROUND_TEXTURE.withPath("textures/block/dirt.png"); // backwards compatible identifier
     private static final MinecraftClient client = MinecraftClient.getInstance();
 
     @Override

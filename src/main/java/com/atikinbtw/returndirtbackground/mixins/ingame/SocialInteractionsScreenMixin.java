@@ -7,10 +7,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SocialInteractionsScreen.class)
 public abstract class SocialInteractionsScreenMixin extends Screen {
@@ -24,14 +22,15 @@ public abstract class SocialInteractionsScreenMixin extends Screen {
         super(title);
     }
 
-    @Inject(at = @At("HEAD"), method = "renderBackground", cancellable = true)
-    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    /**
+     * @author atikiNBTW
+     * @reason to render dirt image across all screen
+     */
+    @Overwrite
+    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
         super.renderInGameBackground(context); //
         int i = this.getSearchBoxX() + 3;
         context.drawGuiTexture(BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
         context.drawGuiTexture(SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
-
-        ci.cancel();
     }
-
 }

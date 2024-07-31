@@ -8,7 +8,7 @@ import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(OptionsScreen.class)
-public abstract class OptionsScreenMixin extends Screen {
+public class OptionsScreenMixin extends Screen {
     protected OptionsScreenMixin(Text title) {
         super(title);
     }

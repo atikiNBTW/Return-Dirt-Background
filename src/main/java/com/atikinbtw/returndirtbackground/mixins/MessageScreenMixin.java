@@ -12,8 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MessageScreen.class)
-public abstract class MessageScreenMixin extends Screen {
-
+public class MessageScreenMixin extends Screen {
     protected MessageScreenMixin(Text title) {
         super(title);
     }
@@ -37,6 +36,7 @@ public abstract class MessageScreenMixin extends Screen {
         ci.cancel();
     }
 
+    @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
         context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 70, 16777215);

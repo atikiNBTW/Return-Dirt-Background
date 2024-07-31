@@ -6,10 +6,8 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameMenuScreen.class)
 public abstract class GameMenuScreenMixin extends Screen {
@@ -19,12 +17,13 @@ public abstract class GameMenuScreenMixin extends Screen {
         super(title);
     }
 
-    @Inject(method = "renderBackground", at = @At("HEAD"), cancellable = true)
-    private void renderBackground(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        if (this.showMenu) {
+    /**
+     * @author atikiNBTW
+     * @reason to render dirt image across all screen
+     */
+    @Overwrite
+    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+        if (this.showMenu)
             this.renderInGameBackground(context);
-        }
-
-        ci.cancel();
     }
 }

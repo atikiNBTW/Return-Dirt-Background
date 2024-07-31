@@ -4,7 +4,6 @@ import com.atikinbtw.returndirtbackground.ReturnDirtBackground;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.CreditsScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,7 +12,6 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(CreditsScreen.class)
 public class CreditsScreenMixin extends Screen {
-
     @Shadow private float time;
     @Shadow @Final private float baseSpeed;
     @Shadow private int creditsHeight;

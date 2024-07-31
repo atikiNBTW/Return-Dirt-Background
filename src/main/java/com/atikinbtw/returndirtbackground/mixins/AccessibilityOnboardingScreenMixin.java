@@ -12,9 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(AccessibilityOnboardingScreen.class)
 public abstract class AccessibilityOnboardingScreenMixin extends Screen {
-
     @Shadow protected abstract void tickNarratorPrompt();
-
     @Shadow @Final private LogoDrawer logoDrawer;
 
     protected AccessibilityOnboardingScreenMixin(Text title) {
