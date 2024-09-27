@@ -3,34 +3,15 @@ package com.atikinbtw.returndirtbackground.mixins.ingame;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.multiplayer.SocialInteractionsScreen;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(SocialInteractionsScreen.class)
-public abstract class SocialInteractionsScreenMixin extends Screen {
-    @Shadow @Final private static Identifier SEARCH_ICON_TEXTURE;
-    @Shadow @Final private static Identifier BACKGROUND_TEXTURE;
+public class SocialInteractionsScreenMixin {
 
-    @Shadow protected abstract int getSearchBoxX();
-    @Shadow protected abstract int getScreenHeight();
-
-    protected SocialInteractionsScreenMixin(Text title) {
-        super(title);
-    }
-
-    /**
-     * @author atikiNBTW
-     * @reason to render dirt image across all screen
-     */
-    @Overwrite
-    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.renderInGameBackground(context); //
-        int i = this.getSearchBoxX() + 3;
-        context.drawGuiTexture(BACKGROUND_TEXTURE, i, 64, 236, this.getScreenHeight() + 16);
-        context.drawGuiTexture(SEARCH_ICON_TEXTURE, i + 10, 76, 12, 12);
+    @Redirect(method = "renderBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/Screen;renderBackground(Lnet/minecraft/client/gui/DrawContext;IIF)V"))
+    public void renderBackground(Screen instance, DrawContext context, int mouseX, int mouseY, float delta) {
+        instance.renderInGameBackground(context);
     }
 }

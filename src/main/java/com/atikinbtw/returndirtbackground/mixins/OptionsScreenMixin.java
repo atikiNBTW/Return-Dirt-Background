@@ -15,8 +15,10 @@ public class OptionsScreenMixin extends Screen {
 
     @Override
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        if (this.client.world != null)
+        if (this.client.world != null) {
             super.renderInGameBackground(context);
+            return;
+        }
 
         ReturnDirtBackground.renderBackgroundTexture(context);
     }

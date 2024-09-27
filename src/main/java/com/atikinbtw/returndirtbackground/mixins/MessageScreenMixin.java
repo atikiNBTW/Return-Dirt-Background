@@ -19,11 +19,11 @@ public class MessageScreenMixin extends Screen {
 
     /**
      * @author atikiNBTW
-     * @reason to render dirt image across all screen
+     * @reason to return the behavior of < 1.20.5
      */
     @Overwrite
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        ReturnDirtBackground.renderBackgroundTexture(context); //
+        ReturnDirtBackground.renderBackgroundTexture(context);
     }
 
     @Inject(at = @At("HEAD"), method = "init", cancellable = true)

@@ -16,21 +16,23 @@ import java.util.Map;
 public class ReturnDirtBackground implements ClientModInitializer {
     private static final Identifier DIRT_TEXTURE = Screen.MENU_BACKGROUND_TEXTURE.withPath("textures/block/dirt.png"); // backwards compatible identifier
     private static final Identifier OPTIONS_BACKGROUND = Screen.MENU_BACKGROUND_TEXTURE.withPath("textures/gui/options_background.png"); // backwards compatible identifier
+    private static final MinecraftClient client = MinecraftClient.getInstance();
     private static Identifier background = DIRT_TEXTURE;
     private static int width = 32;
     private static int height = 32;
-    private static final MinecraftClient client = MinecraftClient.getInstance();
-
-    @Override
-    public void onInitializeClient() {
-        // - means that this line has been changed from the default method
-    }
 
     public static Identifier getBackgroundTexture() {
         return background;
     }
 
     public static void onReloadComplete() {
+        if (client.getResourcePackManager().getEnabledIds().stream().anyMatch(id -> id.equals("high_contrast"))) {
+            background = Screen.MENU_BACKGROUND_TEXTURE;
+            width = 16;
+            height = 16;
+            return;
+        }
+
         Map<Identifier, Resource> resourceMap = client.getResourceManager().findResources(Path.of("textures/gui").toString(), path -> path.toString().endsWith("options_background.png"));
         if (resourceMap.isEmpty()) {
             background = DIRT_TEXTURE;
@@ -57,5 +59,9 @@ public class ReturnDirtBackground implements ClientModInitializer {
         context.setShaderColor(0.25F, 0.25F, 0.25F, 1.0F);
         context.drawTexture(getBackgroundTexture(), 0, 0, 0, 0.0F, 0.0F, client.getWindow().getWidth(), client.getWindow().getHeight(), width, height);
         context.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+
+    @Override
+    public void onInitializeClient() {
     }
 }

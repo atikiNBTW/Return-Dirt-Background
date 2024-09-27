@@ -12,9 +12,13 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(CreditsScreen.class)
 public class CreditsScreenMixin extends Screen {
-    @Shadow private float time;
-    @Shadow @Final private float baseSpeed;
-    @Shadow private int creditsHeight;
+    @Shadow
+    private float time;
+    @Shadow
+    @Final
+    private float baseSpeed;
+    @Shadow
+    private int creditsHeight;
 
     protected CreditsScreenMixin(Text title) {
         super(title);
@@ -22,7 +26,7 @@ public class CreditsScreenMixin extends Screen {
 
     /**
      * @author atikiNBTW
-     * @reason to render dirt image across all screen
+     * @reason to return the behavior of < 1.20.5
      */
     @Overwrite
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
@@ -31,7 +35,7 @@ public class CreditsScreenMixin extends Screen {
         boolean j = true;
         float g = this.time / this.baseSpeed;
         float h = g * 0.02F;
-        float k = (float)(this.creditsHeight + this.height + this.height + 24) / this.baseSpeed;
+        float k = (float) (this.creditsHeight + this.height + this.height + 24) / this.baseSpeed;
         float l = (k - 20.0F - g) * 0.005F;
         if (l < h) {
             h = l;

@@ -7,14 +7,14 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
 @Mixin(DownloadingTerrainScreen.class)
-public abstract class DownloadingTerrainScreenMixin {
+public class DownloadingTerrainScreenMixin {
 
     /**
      * @author atikiNBTW
-     * @reason to render dirt image across all screen
+     * @reason to return the behavior of < 1.20.5
      */
     @Overwrite
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        ReturnDirtBackground.renderBackgroundTexture(context); //
+        ReturnDirtBackground.renderBackgroundTexture(context);
     }
 }
