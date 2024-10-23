@@ -13,12 +13,10 @@
     "ingame.DemoScreenMixin",
     "ingame.DownloadingTerrainScreenMixin",
     "ingame.GameMenuScreenMixin",
-    "ingame.SocialInteractionsScreenMixin"
+    "ingame.SocialInteractionsScreenMixin",
+    "resourcepacks.MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-    "resourcepacks.MinecraftClientMixin"
-  ]
+  }
 }

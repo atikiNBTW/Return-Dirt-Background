@@ -30,12 +30,7 @@ public class MessageScreenMixin extends Screen {
     protected void init(CallbackInfo ci) {
         ci.cancel();
     }
-
-    @Inject(at = @At("HEAD"), method = "initTabNavigation", cancellable = true)
-    protected void initTabNavigation(CallbackInfo ci) {
-        ci.cancel();
-    }
-
+    
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);

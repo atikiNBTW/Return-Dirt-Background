@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
 @Mixin(Screen.class)
-public abstract class ScreenMixin {
+public class ScreenMixin {
     /**
      * @author atikiNBTW
      * @reason to return the behavior of < 1.20.5

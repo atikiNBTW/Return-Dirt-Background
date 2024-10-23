@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AccessibilityOnboardingScreen.class)
-public abstract class AccessibilityOnboardingScreenMixin extends Screen {
+public class AccessibilityOnboardingScreenMixin extends Screen {
     protected AccessibilityOnboardingScreenMixin(Text title) {
         super(title);
     }
