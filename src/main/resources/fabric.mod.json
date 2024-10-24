@@ -4,12 +4,12 @@
   "version": "${version}",
   "name": "Return Dirt Background",
   "description": "This mod reverts the 24w09a snapshot background change",
-  "homepage": "https://modrinth.com/mod/return-dirt-background",
   "authors": [
     "atikiNBTW"
   ],
   "contact": {
-    "repo": "https://github.com/atikiNBTW/Return-Dirt-Background"
+    "homepage": "https://modrinth.com/mod/return-dirt-background",
+    "sources": "https://github.com/atikiNBTW/chat-on-lost-focus-fabric"
   },
   "license": "MIT",
   "icon": "assets/returndirtbackground/icon.png",
@@ -24,6 +24,6 @@
   ],
   "depends": {
     "fabricloader": ">=${min_loader_version}",
-    "minecraft": ">=1.20.5"
+    "minecraft": ">=1.16"
   }
 }
