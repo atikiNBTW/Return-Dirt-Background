@@ -9,7 +9,7 @@
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/return-dirt-background",
-    "sources": "https://github.com/atikiNBTW/chat-on-lost-focus-fabric"
+    "sources": "https://github.com/atikiNBTW/Return-Dirt-Background"
   },
   "license": "MIT",
   "icon": "assets/returndirtbackground/icon.png",
@@ -24,6 +24,6 @@
   ],
   "depends": {
     "fabricloader": ">=${min_loader_version}",
-    "minecraft": ">=1.16"
+    "minecraft": ">=1.20.5"
   }
 }
