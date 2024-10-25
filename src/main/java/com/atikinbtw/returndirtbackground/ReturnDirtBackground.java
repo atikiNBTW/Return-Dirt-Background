@@ -12,13 +12,18 @@ import net.minecraft.util.Identifier;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.Map;
+import java.util.function.Function;
 
 public class ReturnDirtBackground implements ClientModInitializer {
     private static final Identifier DIRT_TEXTURE = Screen.MENU_BACKGROUND_TEXTURE.withPath("textures/block/dirt.png"); // backwards compatible identifier
     private static final Identifier OPTIONS_BACKGROUND = Screen.MENU_BACKGROUND_TEXTURE.withPath("textures/gui/options_background.png"); // backwards compatible identifier
     private static final MinecraftClient client = MinecraftClient.getInstance();
+    private static Method drawTextureFunc;
+    private static boolean isNew;
     private static Identifier background = DIRT_TEXTURE;
     private static int width = 32;
     private static int height = 32;
@@ -66,12 +71,41 @@ public class ReturnDirtBackground implements ClientModInitializer {
     }
 
     public static void renderBackgroundTexture(DrawContext context) {
-        RenderSystem.setShaderColor(0.25F, 0.25F, 0.25F, 1.0F);
-        context.drawTexture(RenderLayer::getGuiTextured, getBackgroundTexture(), 0, 0, 0.0F, 0.0F, client.getWindow().getWidth(), client.getWindow().getHeight(), width, height);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        try {
+            if (isNew) {
+                setShaderColor(context, 0.25F, 0.25F, 0.25F, 1.0F);
+                context.drawTexture(RenderLayer::getGuiTextured, getBackgroundTexture(), 0, 0, 0.0F, 0.0F, client.getWindow().getWidth(), client.getWindow().getHeight(), width, height);
+                setShaderColor(context, 1.0F, 1.0F, 1.0F, 1.0F);
+                //drawTextureFunc.invoke(context, RenderLayer::getGuiTextured, getBackgroundTexture(), 0, 0, 0.0F, 0.0F, client.getWindow().getWidth(), client.getWindow().getHeight(), width, height);
+            } else {
+                setShaderColor(context, 0.25F, 0.25F, 0.25F, 1.0F);
+                drawTextureFunc.invoke(context, getBackgroundTexture(), 0, 0, 0.0F, 0.0F, client.getWindow().getWidth(), client.getWindow().getHeight(), width, height);
+                setShaderColor(context, 1.0F, 1.0F, 1.0F, 1.0F);
+            }
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            LoggerFactory.getLogger(ReturnDirtBackground.class).error("Error while rendering background:", e);
+        }
+    }
+
+    private static void setShaderColor(DrawContext context, float red, float green, float blue, float alpha) {
+        context.draw();
+        RenderSystem.setShaderColor(red, green, blue, alpha);
     }
 
     @Override
     public void onInitializeClient() {
+        try {
+            // 1.21.3+
+            drawTextureFunc = DrawContext.class.getDeclaredMethod("method_25290", Function.class, Identifier.class, int.class, int.class, float.class, float.class, int.class, int.class, int.class, int.class);
+            isNew = true;
+        } catch (NoSuchMethodException e) {
+            try {
+                // <1.21.1
+                drawTextureFunc = DrawContext.class.getDeclaredMethod("method_25290", Identifier.class, int.class, int.class, float.class, float.class, int.class, int.class, int.class, int.class);
+                isNew = false;
+            } catch (NoSuchMethodException ex) {
+                throw new RuntimeException("Can't load drawTexture method, something is very bad with your game:", ex);
+            }
+        }
     }
 }
