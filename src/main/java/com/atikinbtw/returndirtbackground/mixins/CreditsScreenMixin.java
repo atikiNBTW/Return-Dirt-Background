@@ -1,11 +1,9 @@
 package com.atikinbtw.returndirtbackground.mixins;
 
 import com.atikinbtw.returndirtbackground.ReturnDirtBackground;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.CreditsScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -48,8 +46,17 @@ public class CreditsScreenMixin extends Screen {
 
         h *= h;
         h = h * 96.0F / 255.0F;
-        RenderSystem.setShaderColor(h, h, h, 1.0F);
-        context.drawTexture(RenderLayer::getGuiTextured, ReturnDirtBackground.getBackgroundTexture(), 0, 0, 0.0F, f, width, this.height, ReturnDirtBackground.getWidth(), ReturnDirtBackground.getHeight());
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        ReturnDirtBackground.renderBackgroundTexture(context,
+                ReturnDirtBackground.getBackgroundTexture(),
+                0,
+                0,
+                0.0F,
+                f,
+                width,
+                this.height,
+                ReturnDirtBackground.getTextureWidth(),
+                ReturnDirtBackground.getTextureHeight(),
+                h, h, h, 1.0F
+        );
     }
 }

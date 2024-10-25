@@ -25,15 +25,15 @@ public class ReturnDirtBackground implements ClientModInitializer {
     private static Method drawTextureFunc;
     private static boolean isNew;
     private static Identifier background = DIRT_TEXTURE;
-    private static int width = 32;
-    private static int height = 32;
+    private static int textureWidth = 32;
+    private static int textureHeight = 32;
 
-    public static int getWidth() {
-        return width;
+    public static int getTextureWidth() {
+        return textureWidth;
     }
 
-    public static int getHeight() {
-        return height;
+    public static int getTextureHeight() {
+        return textureHeight;
     }
 
     public static Identifier getBackgroundTexture() {
@@ -43,16 +43,16 @@ public class ReturnDirtBackground implements ClientModInitializer {
     public static void onReloadComplete() {
         if (client.getResourcePackManager().getEnabledIds().stream().anyMatch(id -> id.equals("high_contrast"))) {
             background = Screen.MENU_BACKGROUND_TEXTURE;
-            width = 16;
-            height = 16;
+            textureWidth = 16;
+            textureHeight = 16;
             return;
         }
 
         Map<Identifier, Resource> resourceMap = client.getResourceManager().findResources(Path.of("textures/gui").toString(), path -> path.toString().endsWith("options_background.png"));
         if (resourceMap.isEmpty()) {
             background = DIRT_TEXTURE;
-            width = 32;
-            height = 32;
+            textureWidth = 32;
+            textureHeight = 32;
             return;
         }
         Resource resource = resourceMap.entrySet().iterator().next().getValue();
@@ -65,8 +65,8 @@ public class ReturnDirtBackground implements ClientModInitializer {
             return;
         }
 
-        width = nativeImage.getWidth();
-        height = nativeImage.getHeight();
+        textureWidth = nativeImage.getWidth();
+        textureHeight = nativeImage.getHeight();
         background = OPTIONS_BACKGROUND;
     }
 
@@ -74,12 +74,27 @@ public class ReturnDirtBackground implements ClientModInitializer {
         try {
             if (isNew) {
                 setShaderColor(context, 0.25F, 0.25F, 0.25F, 1.0F);
-                context.drawTexture(RenderLayer::getGuiTextured, getBackgroundTexture(), 0, 0, 0.0F, 0.0F, client.getWindow().getWidth(), client.getWindow().getHeight(), width, height);
+                context.drawTexture(RenderLayer::getGuiTextured, getBackgroundTexture(), 0, 0, 0.0F, 0.0F, client.getWindow().getWidth(), client.getWindow().getHeight(), textureWidth, textureHeight);
                 setShaderColor(context, 1.0F, 1.0F, 1.0F, 1.0F);
-                //drawTextureFunc.invoke(context, RenderLayer::getGuiTextured, getBackgroundTexture(), 0, 0, 0.0F, 0.0F, client.getWindow().getWidth(), client.getWindow().getHeight(), width, height);
             } else {
                 setShaderColor(context, 0.25F, 0.25F, 0.25F, 1.0F);
-                drawTextureFunc.invoke(context, getBackgroundTexture(), 0, 0, 0.0F, 0.0F, client.getWindow().getWidth(), client.getWindow().getHeight(), width, height);
+                drawTextureFunc.invoke(context, getBackgroundTexture(), 0, 0, 0.0F, 0.0F, client.getWindow().getWidth(), client.getWindow().getHeight(), textureWidth, textureHeight);
+                setShaderColor(context, 1.0F, 1.0F, 1.0F, 1.0F);
+            }
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            LoggerFactory.getLogger(ReturnDirtBackground.class).error("Error while rendering background:", e);
+        }
+    }
+
+    public static void renderBackgroundTexture(DrawContext context, Identifier background, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight, float red, float green, float blue, float alpha) {
+        try {
+            if (isNew) {
+                setShaderColor(context, red, green, blue, alpha);
+                context.drawTexture(RenderLayer::getGuiTextured, background, x, y, u, v, width, height, textureWidth, textureHeight);
+                setShaderColor(context, 1.0F, 1.0F, 1.0F, 1.0F);
+            } else {
+                setShaderColor(context, red, green, blue, alpha);
+                drawTextureFunc.invoke(context, background, x, y, u, v, width, height, textureWidth, textureHeight);
                 setShaderColor(context, 1.0F, 1.0F, 1.0F, 1.0F);
             }
         } catch (IllegalAccessException | InvocationTargetException e) {
