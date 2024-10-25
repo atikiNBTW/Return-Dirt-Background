@@ -34,3 +34,6 @@ run/
 
 # build
 build/
+
+# examples
+!template_resourcepack.zip
