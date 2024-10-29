@@ -28,7 +28,7 @@ public class MessageScreenMixin extends Screen {
      * @reason to return the behavior of < 1.20.5
      */
     @Overwrite
-    protected void init() {
+    public void init() {
     }
 
     @Override
