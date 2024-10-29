@@ -2,6 +2,7 @@ package com.atikinbtw.returndirtbackground;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -109,14 +110,15 @@ public class ReturnDirtBackground implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        String methodName = FabricLoader.getInstance().getMappingResolver().mapMethodName("intermediary", "net.minecraft.class_332", "method_25290", "(Ljava/util/function/Function;Lnet/minecraft/class_2960;IIFFIIII)V");
         try {
             // 1.21.3+
-            drawTextureFunc = DrawContext.class.getDeclaredMethod("method_25290", Function.class, Identifier.class, int.class, int.class, float.class, float.class, int.class, int.class, int.class, int.class);
+            drawTextureFunc = DrawContext.class.getDeclaredMethod(methodName, Function.class, Identifier.class, int.class, int.class, float.class, float.class, int.class, int.class, int.class, int.class);
             isNew = true;
         } catch (NoSuchMethodException e) {
             try {
                 // <1.21.1
-                drawTextureFunc = DrawContext.class.getDeclaredMethod("method_25290", Identifier.class, int.class, int.class, float.class, float.class, int.class, int.class, int.class, int.class);
+                drawTextureFunc = DrawContext.class.getDeclaredMethod(methodName, Identifier.class, int.class, int.class, float.class, float.class, int.class, int.class, int.class, int.class);
                 isNew = false;
             } catch (NoSuchMethodException ex) {
                 throw new RuntimeException("Can't load drawTexture method, something is very bad with your game:", ex);
