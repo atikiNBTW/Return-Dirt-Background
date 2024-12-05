@@ -117,7 +117,7 @@ public class ReturnDirtBackground implements ClientModInitializer {
             isNew = true;
         } catch (NoSuchMethodException e) {
             try {
-                // <1.21.1
+                // <1.21.2
                 drawTextureFunc = DrawContext.class.getDeclaredMethod(methodName, Identifier.class, int.class, int.class, float.class, float.class, int.class, int.class, int.class, int.class);
                 isNew = false;
             } catch (NoSuchMethodException ex) {
